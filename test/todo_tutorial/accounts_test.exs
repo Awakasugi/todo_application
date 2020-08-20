@@ -19,7 +19,7 @@ defmodule AccountsTest do
   describe "list_users/1" do
     test "returns the list of users" do
       user = user_fixture()
-      assert Accounts.list_users() == ["John"]
+      assert Accounts.list_users() == [user]
     end
   end
 
