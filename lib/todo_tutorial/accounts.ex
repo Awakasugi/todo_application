@@ -8,8 +8,8 @@ defmodule TodoTutorial.Accounts do
 
   def list_users(page \\ 0) do
     query = from u in "users",
-      where: u.id > ^page * @users_per_page,
-      where: u.id <= (^page + 1) * @users_per_page,
+      limit: @users_per_page,
+      offset: ^page * @users_per_page,
       order_by: [desc: :id],
       select: u.name
     Repo.all(query)
