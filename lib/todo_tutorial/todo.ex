@@ -18,7 +18,7 @@ defmodule TodoTutorial.Todo do
 
   """
   def list_tasks do
-    Repo.all(Task)
+    Task |> preload(:user) |> Repo.all()
   end
 
   @doc """
