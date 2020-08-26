@@ -37,8 +37,7 @@ defmodule AccountsTest do
 
   describe "change_user/1" do
     test "returns a user changeset" do
-      user = user_fixture()
-      assert %Ecto.Changeset{} = Accounts.change_user(user)
+      assert %Ecto.Changeset{} = Accounts.change_user(%User{})
     end
   end
 
