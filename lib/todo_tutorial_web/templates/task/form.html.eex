@@ -13,6 +13,10 @@
   <%= checkbox f, :is_finished %>
   <%= error_tag f, :is_finished %>
 
+  <%= label f, :user_id %>
+  <%= select f, :user_id , Enum.map(@users, &{&1.name, &1.id})%>
+  <%= error_tag f, :user_id %>
+
   <div>
     <%= submit "Save" %>
   </div>

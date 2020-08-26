@@ -3,18 +3,22 @@ defmodule TodoTutorialWeb.TaskController do
 
   alias TodoTutorial.Todo
   alias TodoTutorial.Todo.Task
+  alias TodoTutorial.Accounts
 
   def index(conn, _params) do
     tasks = Todo.list_tasks()
-    render(conn, "index.html", tasks: tasks)
+    users = Accounts.list_users()
+    render(conn, "index.html", tasks: tasks, users: users)
   end
 
   def new(conn, _params) do
     changeset = Todo.change_task(%Task{})
-    render(conn, "new.html", changeset: changeset)
+    users = Accounts.list_users()
+    render(conn, "new.html", changeset: changeset, users: users)
   end
 
   def create(conn, %{"task" => task_params}) do
+    users = Accounts.list_users()
     case Todo.create_task(task_params) do
       {:ok, _} ->
         conn
@@ -22,7 +26,7 @@ defmodule TodoTutorialWeb.TaskController do
         |> redirect(to: Routes.task_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, users: users)
     end
   end
 
